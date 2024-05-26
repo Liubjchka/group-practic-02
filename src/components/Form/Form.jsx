@@ -14,6 +14,7 @@ const handleSubmit = (evt) => {
     return alert("can't be empty");
   }
   onSubmit(searchQuery);
+  setSearchQuery("");
 }
 
 
