@@ -1,5 +1,5 @@
 import { getPhotos } from 'apiService/photos';
-import { Form, Text } from 'components';
+import { Form, Loader, PhotosGallery, Text } from 'components';
 import { useEffect, useState } from 'react';
 
 export const Photos = () => {
@@ -30,13 +30,20 @@ finally {
 }, [query, page])
 const onHandleSubmit = (searchQuery) => {
   // console.log(searchQuery);
+  setImages([])
+  setPage(1)
+  
 setQuery(searchQuery);
 }
 console.log(isVisible);
   return (
     <>
-      <Text textAlign="center">Let`s begin search 🔎</Text>
     <Form onSubmit={onHandleSubmit}/>
+    {images.length >0 && <PhotosGallery images={images}/>}
+    {!images.length && !empty && <Text textAlign="center">Let`s begin search 🔎</Text>}
+    {isLoading && <Loader/>}
+    {error && <Text textAlign="center">❌ Something went wrong - {error}</Text>}
+    {empty && <Text textAlign="center">Sorry. There are no images ... 😭</Text>}
     </>
   );
 };
